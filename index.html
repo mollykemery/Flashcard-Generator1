@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Flashcard Generator</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #f4f4f4;
+}
+
+.input-box {
+    margin: 20px;
+}
+
+input {
+    padding: 8px;
+    margin: 5px;
+}
+
+button {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+#flashcards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    width: 180px;
+    height: 120px;
+    background: white;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Flashcard Generator</h1>
+
+<div class="input-box">
+    <input id="term" placeholder="Enter term">
+    <input id="definition" placeholder="Enter definition">
+    <button onclick="addCard()">Add Flashcard</button>
+</div>
+
+<div id="flashcards"></div>
+
+<script>
+const flashcards = document.getElementById("flashcards");
+
+function addCard() {
+    const term = document.getElementById("term").value;
+    const definition = document.getElementById("definition").value;
+
+    if (!term || !definition) return;
+
+    const card = document.createElement("div");
+    card.className = "card";
+    card.textContent = term;
+
+    let flipped = false;
+
+    card.onclick = function() {
+        flipped = !flipped;
+        card.textContent = flipped ? definition : term;
+    };
+
+    flashcards.appendChild(card);
+
+    document.getElementById("term").value = "";
+    document.getElementById("definition").value = "";
+}
+</script>
+
+</body>
+</html>
